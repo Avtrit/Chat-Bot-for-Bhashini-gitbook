@@ -1,0 +1,274 @@
+TITLE: Request Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/pipeline-compute-call/request-payload#configuration-example
+
+Copy
+PIPELINE COMPUTE CALL
+Request Payload
+
+This sub-page helps the integrator to understand various different types of request payload based on the individual task or combination of tasks in that sequence that integrator wants to do.
+
+Request Payload for Individual Task
+ASR
+Translation
+TTS
+Copy
+	{
+
+	    "pipelineTasks": [
+
+	        {
+
+	            "taskType": "translation",
+
+	            "config": {
+
+	                "language": {
+
+	                    "sourceLanguage": "hi",
+
+	                    "targetLanguage": "en"
+
+	                },
+
+	                "serviceId": "xxxxx--ssssss-d-ddd--dddd",
+
+	                "numTranslation": "True"
+
+	            }
+
+	        }
+
+	    ],
+
+	    "inputData": {
+
+	        "input": [
+
+	            {
+
+	                "source": "मेरा नाम विहिर है और मैं भाषाावर्ष यूज कर रहा हूँ"
+
+	            }
+
+	        ],
+
+	        "audio": [
+
+	            {
+
+	                "audioContent": null
+
+	            }
+
+	        ]
+
+	    }
+
+	}
+
+This response contains 2 major parameters listed below and detailed further down the section:
+
+pipelineTasks
+
+inputData
+
+Parameter: pipelineTasks
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of taskType and config, that are to be done by the integrator. 
+In the above example, pipelineTasks takes only one dictionary (line 3-12) because integrator wants to do only Translation.
+
+taskType parameter takes String that takes the value translation
+
+config parameter takes a Dictionary that contains following parameters:
+
+Language
+Service ID
+numTranslation
+
+For Translation, language parameter takes both sourceLanguage and targetLanguage which accepts ISO-639 Series Code of the language.
+
+Parameter: inputData
+
+inputData Parameter takes the actual input from the integrator on which the individual task has to be done. It can take the input either via input parameter or audio parameter depending on the task to be done.
+Since Transaltion is done on digital text input data, for Translation, 
+
+input parameter is mandatory and
+
+audio parameter is optional and of no use for Translation.
+
+input parameter takes source parameter which accepts digital text string. 
+
+Request Payload for Combination of Tasks in specific sequence
+ASR+Translation
+Translation+TTS
+ASR+Translation+TTS
+Copy
+	{
+
+	    "pipelineTasks": [
+
+	        {
+
+	            "taskType": "asr",
+
+	            "config": {
+
+	                "language": {
+
+	                    "sourceLanguage": "xx"
+
+	                },
+
+	                "serviceId": "xxxxx--ssssss-d-ddd--dddd",
+
+	                "audioFormat": "flac",
+
+	                "samplingRate": 16000
+
+	            }
+
+	        },
+
+	        {
+
+	            "taskType": "translation",
+
+	            "config": {
+
+	                "language": {
+
+	                    "sourceLanguage": "xx",
+
+	                    "targetLanguage": "yy"
+
+	                },
+
+	                "serviceId": "xxxxx--ssssss-d-ddd--mfkds"
+
+	            }
+
+	        }
+
+	    ],
+
+	    "inputData": {
+
+	        "input": [
+
+	            {
+
+	                "source": null
+
+	            }
+
+	        ],
+
+	        "audio": [
+
+	            {
+
+	                "audioContent": "{{generated_base64_content}}"
+
+	            }
+
+	        ]
+
+	    }
+
+	}
+Parameter: pipelineTasks
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of taskType and config, that are to be done by the integrator. 
+In the above example, pipelineTasks takes two dictionaries:
+
+Line 3 to 13 i.e., ASR Dictionary
+
+Line 14 to 23 i.e., Translation Dictionary
+
+because integrator wants to do ASR of the input voice followed by Translation of the digital text. 
+
+Line Number 7 and Line Number 18 are connected with below understanding. Consider a use-case described below:
+
+Integrator wants to speak in say Hindi language and wants to see the translated output in Marathi. For this to happen, integrator has to:
+
+Convert the Audio integrator has spoken to digital text i.e., ASR of Hindi
+
+Translate this digital Hindi text to Marathi digital text i.e., Translation from Hindi to Marathi
+
+Therefore, the language code for ASR that is to be inserted in Line 7, shall be hi, i.e., ISO 639 series code for Hindi. Once this Hindi digital text is generated, the same shall be translated to Marathi, therefore the source language code for Translation that is to be inserted in Line 18, shall also be hi, which means that language code in Line 7 and Line 18 shall be same. 
+
+For Target Language the code to be inserted in Line 19 shall be mr, i.e., ISO 639 series code for Marathi.  
+
+Understanding of all other parameters remains same as described above in Request Payload for Individual Task.
+
+Pre-Processors and Post-Processors within Compute Request
+ASR
+Translation
+TTS
+
+In translation (NMT) systems, postprocessors play a crucial role in refining the textual output to meet specific needs. Below, we provide details on the postprocessor available for translation, along with an example of how to configure it in your request body.
+
+Postprocessors
+
+Glossary
+
+Syntax: "postProcessors": ["glossary"]
+
+Function: The glossary postprocessor allows users to create a list of glossary terms within Bhashini Udyat under the My Profile Section once logged in. Glossary terms created are unique for each Bhashini Inference API Key generated under app names. This postprocessor ensures that specific nouns and noun phrases have their translations overridden as per the user's glossary.
+
+Example:
+
+Default Translation: "Digital India Bhashini Division" is translated to "डिजिटल इंडिया भैसिनी प्रभाग".
+
+With Glossary Term: If the glossary term between English and Hindi is entered as "डिजिटल इंडिया भाषिणी डिवीज़न", this will override the default translation.
+
+Link to Access My Profile Page and Generate Keys and Glossary: Bhashini Udyat Profile Page
+
+Glossary Terms Usage: Glossary terms help provide customized solutions for domain-specific translations, ensuring accuracy and context relevance in the translated output.
+
+Example of Glossary Usage:
+
+Case sensitivity handling (Ex: Glossary entry - English to  Hindi as IPO -> आईपीओ). 
+
+Glossary entries will work by default for:
+
+Entered noun/noun phrase (e.g., IPO)
+
+Capitalized case (Ipo)
+
+Lower case (ipo)
+
+Upper case ( IPO)
+
+Reverse case (if आईपीओ is the source, the target is IPO when translating from Hindi to English).
+
+Configuration Example
+
+The configuration of the glossary postprocessor can be included within the config section of the request body as shown below:
+
+Copy
+	"config": {
+
+	    "language": {
+
+	        "sourceLanguage": "hi",
+
+	        "targetLanguage": "xx"
+
+	    },
+
+	    "postProcessors": ["glossary"]
+
+	    "serviceId": "xxxxx--ssssss-d-ddd--dddd"
+
+	}
+Previous
+Pipeline Compute Call
+Next
+Response Payload
+
+Last updated 8 months ago

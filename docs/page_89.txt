@@ -1,0 +1,147 @@
+TITLE: Response Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/pipeline-config-call/response-payload#parameter-languages-1
+
+Copy
+PIPELINE CONFIG CALL
+Response Payload
+
+This sub-page helps the integrator to understand two different types of response payload, based on different request payload.
+
+Request sent without configuration parameter
+Complete Payload
+Complete Payload
+
+Complete Payload shows the JSON structure of the content that is received when Integrator makes a ULCA Config Call without any configuration details as detailed in Tab 1 of Request Payload
+
+Note: The above payload is used for reference. Response may differ based on the pipeline used by the integrator.
+
+This response contains 3 major parameters listed below and detailed further down the section:
+
+languages
+
+pipelineResponseConfig
+
+pipelineInferenceAPIEndPoint
+
+Parameter: languages
+
+This parameter helps integrator to know what languages are available that can be used for the requested pipeline tasks in that sequence.
+
+For example, consider scenarios where Integrator requests for either:
+
+Individual Task i.e., either ASR or Translation or TTS as shown here
+
+Combination of Tasks in that sequence i.e.,
+
+ASR+Translation or
+
+Translation+TTS or
+
+ASR+Translation+TTS as shown here
+
+For Single Tasks, the understanding is straight-forward that the languages appearing in the response corresponds to that task. e.g. 
+
+If the integrator wants to do only ASR, the languages appearing shows that Server can do ASR in these languages. In this case, parameters sourceLanguage and targetLanguageList will contain the same value since for ASR involves only one language unlike Translation where source and target (two) languages are involved. In this case, targetLanguageList can safely be ignored and only sourceLanguage can be used. 
+
+If the integrator wants to do only TTS, the languages appearing shows that Server can do TTS in these languages. In this case, parameters sourceLanguage and targetLanguageList will contain the same value since for TTS too only one language is involved. In this case too, targetLanguageList can safely be ignored and only sourceLanguage can be used.
+
+Usual format of language for such cases is below:
+
+Supported Languages for requested Pipeline.
+Copy
+	"languages": [
+
+	        {
+
+	            "sourceLanguage": "bn",
+
+	            "targetLanguageList": [
+
+	                "bn"              
+
+	            ]
+
+	        },
+
+	        {
+
+	            "sourceLanguage": "en",
+
+	            "targetLanguageList": [               
+
+	                "en"
+
+	            ]
+
+	        },       
+
+	        {
+
+	            "sourceLanguage": "hi",
+
+	            "targetLanguageList": [
+
+	                "hi"
+
+	            ]
+
+	        }
+
+	    ]
+
+If the integrator wants to do only Translation, the languages appearing shows that Server can do Translation in these languages. In this case, parameters sourceLanguage and targetLanguageList means that for the languages appearing in targetLanguageList are the ones in which Server can do translation FROM the language that appear in sourceLanguage.
+
+For Combination of Tasks, the understanding is that the languages appearing in the response are the ones which Server can cater to, for the complete task sequence sent by the integrator. e.g.
+
+If the integrator wants to do ASR and Translation together in that sequence, the languages appearing shows that the Server can do this combination in that sequence for these languages. In this case, the Server would be able to do this combination for the languages appearing in targetLanguageList, if the input is given in the language mentioned in sourceLanguage parameter.
+
+If the integrator wants to do Translation and TTS together in that sequence, the languages appearing shows that the Server can do this combination in that sequence for these languages. In this case, the Server would be able to do this combination for the languages appearing in targetLanguageList, if the input is given in the language mentioned in sourceLanguage parameter.
+
+If the integrator wants to do ASR, then Translation and then TTS together in that sequence, the languages appearing shows that the Server can do this combination in that sequence for these languages. In this case, the Server would be able to do this combination for the languages appearing in targetLanguageList, if the input is given in the language mentioned in sourceLanguage parameter.
+
+Usual format of language for such cases is below:
+
+Supported Languages for requested Pipeline.
+
+Parameter: pipelineResponseConfig
+
+This parameter helps the integrator to obtain the Service ID for a particular task type and language(s) associated with that task.
+
+The task types appearing here will be the same as the ones that the integrator requested while sending the pipelineTasks parameter in Request Payload
+e.g., Integrator request for configuration of the combination of ASR, Translation and TTS together, the pipelineResponseConfig parameter in the output will contain the JSON data as shown below. It will contain three dictionaries for each task type ASR, Translation and TTS.
+If Integrator requested for a combination of ASR and Translation, this parameter would contain JSON data for ASR and Translation only.
+
+Now consider, Integrator knows the language for which the combination ASR, Translation and TTS is to be performed (language may be determined by asking the end-user etc.). 
+
+Say the language pair chosen is Bengali to Assamese.
+
+Integrator shall now obtain the Service ID correspondingly in the below manner:
+
+Obtain Service ID for doing ASR in Bengali. Line 6 from Dictionary of Line 5-14 below.
+
+Obtain Service ID for doing Translation from Bengali to Assamese. Line 49 from Dictionary of Line 48-55 below.
+
+Obtain Service ID for doing TTS in Assamese. Line 89 from Dictionary of Line 88-98 below.
+
+These Service IDs will be used in the Pipeline Compute Call.
+
+For each taskType in the response, there may appear additional configuration parameters that are specific to each taskType. e.g., 
+
+As seen below, for taskType ASR, domain parameter appears which helps integrator to understand the domain(s) (general, agriculture, medical etc.), this particular Service ID is capable of providing output for.
+
+Similarly, for taskType TTS, supportedVoice parameter appears which helps integrator to understand which all voices are available for a particular language that is serviced by that specific Service ID.
+
+Configuration Details and Service IDs for requested pipeline tasks.
+Parameter: pipelineInferenceAPIEndPoint
+
+This parameter helps the integrator to know the details of the Pipeline Compute Call where to send (callbackURL parameter) and shall be sent along with the Authorization Key-Value pair received under inferenceApiKey parameter which will be used for authentication of the same.
+
+Note: The above sample config call is used for reference. Response may differ based on the pipeline used by the integrator.
+
+Details for Actual Inferencing.
+Previous
+Request Payload
+Next
+Pipeline Compute Call
+
+Last updated 2 years ago

@@ -1,0 +1,44 @@
+TITLE: Pipeline Compute Call | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/pipeline-compute-call
+
+Copy
+Pipeline Compute Call
+
+This page will help the integrator to get the output of the task sequence requested. This page will detail out the API call, its parameters, understanding of the Input and Output Payloads.
+
+Endpoint: Endpoint is obtained from the callbackURL parameter under pipelineInferenceAPIEnfPoint parameter from the Response Payload of Pipeline Config Call as shown here.
+
+Additional Headers:
+auth parameter key
+auth parameter value
+
+Payload:
+
+ASR
+
+Translation
+
+TTS
+
+ASR+Translation
+
+Translation+TTS
+
+ASR+Translation+TTS
+
+Additional Headers
+
+Below is the understanding and process of obtaining the additional Headers that shall be sent to make the Pipeline Compute API Call. These headers are used for uniquely identifying each integrator for a particular application and authenticate them for the API usage.
+
+auth parameter key: This value is obtained from name parameter under inferenceApiKey under pipelineInferenceAPIEnfPoint. 
+
+auth parameter value: This value is obtained from value parameter under inferenceApiKey under pipelineInferenceAPIEnfPoint. 
+
+To know more about Additional Headers, please refer here.
+
+Previous
+Response Payload
+Next
+Request Payload
+
+Last updated 2 years ago

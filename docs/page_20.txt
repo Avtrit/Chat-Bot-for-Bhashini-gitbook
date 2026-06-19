@@ -1,0 +1,25 @@
+TITLE: Response Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/optical-character-recognition-call/response-payload
+
+Copy
+OPTICAL CHARACTER RECOGNITION CALL
+Response Payload
+
+This sub-page lets the integrator to actually be able to obtain the inference response with the output of individual tasks or tasks sequence in the order requested by the integrator.
+
+Optical Character Recognition Response
+
+The above JSON Response shows the output of the Optical Character Recognition task requested by the integrator in that order.
+
+Parameter: output
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of source and target that are to be done by the integrator. In the above example, output takes only one dictionary (line 6-11) in which output.source is a parameter which maps to output text content for the provided input image.
+
+Previous
+Request Payload
+Next
+Audio Language Detection Compute Call
+
+Last updated 1 year ago

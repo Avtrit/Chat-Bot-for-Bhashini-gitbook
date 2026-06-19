@@ -1,0 +1,26 @@
+TITLE: Pre-requisites and Onboarding | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/pre-requisites-and-onboarding
+
+Copy
+Pre-requisites and Onboarding
+
+This page will help the integrator to get themselves onboarded on Bhashini and get the required API Keys.
+
+Account Creation
+
+Integrator shall onboard themselves on Bhashini via the link below:
+
+Registration: https://dashboard.bhashini.co.in/user/register
+
+Once an Integrator reaches the Integrator Registration Page, Integrator has to fill the required details as shown below:
+
+Please check the spam folder for authentication email too.
+
+Users will be able to view their USER ID, API Keys once registered and the registration of the account is approved by DIBD team.
+
+Previous
+Overall Understanding of the API Calls
+Next
+Available Models for usage
+
+Last updated 1 year ago

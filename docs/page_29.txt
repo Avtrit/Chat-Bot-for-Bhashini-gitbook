@@ -1,0 +1,21 @@
+TITLE: Response Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/speaker-diarization-compute-call/response-payload
+
+Copy
+SPEAKER DIARIZATION COMPUTE CALL
+Response Payload
+
+This sub-page lets the integrator to actually be able to obtain the inference response with the output of individual tasks or tasks sequence in the order requested by the integrator.
+
+Complete payload
+
+Speaker Diarization response
+
+The above JSON Response shows the output of the Speaker Diarization task requested by the integrator in that order. 
+
+Previous
+Request Payload
+Next
+Possible Errors
+
+Last updated 1 year ago

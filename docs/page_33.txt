@@ -1,0 +1,19 @@
+TITLE: Appendix | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/appendix
+
+Copy
+Appendix
+Full Forms
+
+ULCA: Universal Language Contribution APIs
+
+ASR: Automatic Speech Recognition
+
+NMT: Neural Machine Translation
+
+TTS: Text to Speech
+
+Previous
+WebSocket ASR API
+
+Last updated 2 years ago

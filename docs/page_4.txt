@@ -1,0 +1,24 @@
+TITLE: Pipeline Search Call | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/pipeline-search-call
+
+Copy
+Pipeline Search Call
+
+This page will help the integrator to understand the Pipeline Search API Call. This page will detail out the API call, its parameters, understanding of the Input and Output Payloads.
+
+Currently, 4 pipeline IDs are available to used directly as follows:
+
+IIT Madras Models: 660fa5bec7fb5b0328229016 [ASR and TTS task types are available in config call for now]
+
+IIT Bombay Models: 660f813c0413087224435d2c [Translation task type are available in config call for now]
+
+IIIT Hyderabad Models: 660f866443e53d4133f65317 [Translation task type are available in config call for now]
+
+Initial Pipeline Models: 64392f96daac500b55c543cd [ASR, Translation, Transliteration and TTS task types are available in config call for now]
+
+Previous
+Available Models for usage
+Next
+Pipeline Config Call
+
+Last updated 1 year ago

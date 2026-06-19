@@ -1,0 +1,74 @@
+TITLE: Request Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/transliteration-config-call/request-payload#config-1
+
+Copy
+TRANSLITERATION CONFIG CALL
+Request Payload
+
+This sub-page helps the integrator to understand two different types of request payload, one without any additional configuration parameters, and one with additional configuration parameters.
+
+Without configuration parameters
+With Configuration Parameters
+Copy
+	{
+
+	    "pipelineTasks" : [
+
+	        
+
+	        {
+
+	            "taskType": "transliteration"
+
+	        }
+
+	        
+
+	    ],
+
+	    "pipelineRequestConfig" : {
+
+	        "pipelineId" : "xxxx8d51ae52cxxxxxxxx"
+
+	    }
+
+	}
+Parameters
+
+We will now understand about each parameter available as a part of this payload.
+
+taskType
+
+Type: String
+
+Line 4-6 for Transliteration
+
+pipelineTasks
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of taskType as defined above, that are to be done by the integrator. The sequence of tasks matter. In the above example, the configuration that will be returned back in the response will be for tasks ASR, Translation and TTS in that order.
+
+Each pipelineId (discussed below), may support few individual or task sequences as explained here and here and detailed out below. 
+
+pipelineId
+
+Type: String
+
+pipelineId takes a string value of the specific pipeline integrator wants to use. The pipeline ID can be obtained either via Pipeline Search Call or via ULCA Web based on the description which helps the integrator to understand what a pipeline can or cannot do.
+Each pipeline ID may support multiple task and task sequences.
+
+The same has been explained here and here.
+
+pipelineRequestConfig
+
+Type: Dictionary
+
+This parameter takes in the configuration requested to do the sequence of tasks defined under parameter pipelineTasks.
+
+Previous
+Transliteration Config Call
+Next
+Response Payload
+
+Last updated 1 year ago

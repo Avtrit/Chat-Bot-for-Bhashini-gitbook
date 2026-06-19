@@ -1,0 +1,374 @@
+TITLE: WebSocket ASR API | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/websocket-asr-api#troubleshooting
+
+Copy
+WebSocket ASR API
+Overview
+
+The ULCASocketClient is a WebSocket client that enables real-time Speech-to-Text (ASR) processing using BHASHINI's WebSocket API. This allows audio captured from a microphone to be streamed to Bhashini’s ASR service and receive transcription results asynchronously.
+
+Prerequisites
+
+Before you begin, ensure you have:
+
+Access to a microphone
+
+Bhashini API Key and Service ID
+
+Internet connectivity
+
+Java Development Kit (JDK) 8 or higher
+
+Maven project setup
+
+Java libraries:
+
+socket.io-client for WebSocket connection
+
+org.json for JSON processing
+
+Required Dependencies (Maven)
+Copy
+xmlCopyEdit<dependencies>
+
+    <!-- Socket.IO client -->
+
+    <dependency>
+
+        <groupId>io.socket</groupId>
+
+        <artifactId>socket.io-client</artifactId>
+
+        <version>2.1.0</version>
+
+    </dependency>
+
+
+
+    <!-- JSON library -->
+
+    <dependency>
+
+        <groupId>org.json</groupId>
+
+        <artifactId>json</artifactId>
+
+        <version>20220320</version>
+
+    </dependency>
+
+</dependencies>
+Key Components
+
+WebSocket Connection: Connect to Bhashini ASR service.
+
+Audio Capture: Access microphone and record audio.
+
+Audio Streaming: Stream audio to the server.
+
+Response Handling: Receive transcription results from the server.
+
+Implementation Steps
+1. Initialize Client
+Copy
+javaCopyEditULCASocketClient client = new ULCASocketClient("YOUR_WEBSOCKET_SERVER_URL", "YOUR_API_KEY");
+2. Connect to Server
+Copy
+javaCopyEditclient.connect();
+3. Configure ASR Task
+Copy
+javaCopyEditJSONObject asrTask = new JSONObject();
+
+asrTask.put("taskType", "asr");
+
+
+
+JSONObject asrConfig = new JSONObject();
+
+asrConfig.put("serviceId", "YOUR_SERVICE_ID");
+
+
+
+JSONObject asrLanguage = new JSONObject();
+
+asrLanguage.put("sourceLanguage", "en");
+
+asrConfig.put("language", asrLanguage);
+
+asrConfig.put("samplingRate", 8000);
+
+asrConfig.put("audioFormat", "wav");
+
+asrConfig.put("encoding", JSONObject.NULL);
+
+
+
+asrTask.put("config", asrConfig);
+
+JSONArray taskSequenceArray = new JSONArray().put(asrTask);
+4. Configure Streaming
+Copy
+javaCopyEditJSONObject streamingConfig = new JSONObject();
+
+streamingConfig.put("responseFrequencyInSecs", 2.0);
+
+streamingConfig.put("responseTaskSequenceDepth", 1);
+5. Start Streaming
+Copy
+javaCopyEditclient.startStream(taskSequenceArray, streamingConfig);
+6. Start Audio Streaming (VAD-enabled)
+
+The client listens for the ready event and then starts audio capture:
+
+Copy
+javaCopyEditclient.startContinuousAudioStreamingWithVAD();
+7. Stop and Disconnect
+Copy
+javaCopyEditclient.stop(true);
+
+client.disconnect();
+ Configuration Parameters
+WebSocket Connection
+Parameter
+Description
+
+serverUrl
+
+WebSocket server URL (wss://dhruva-api.bhashini.gov.in)
+
+apiKey
+
+Your Bhashini API key
+
+ASR Task Configuration
+Parameter
+Description
+
+taskType
+
+Must be "asr"
+
+serviceId
+
+Specific ASR service ID
+
+sourceLanguage
+
+Language code (e.g., "en")
+
+samplingRate
+
+Usually 8000 Hz
+
+audioFormat
+
+Format: "wav"
+
+encoding
+
+Optional, often null
+
+Streaming Config
+Parameter
+Description
+
+responseFrequencyInSecs
+
+Frequency of intermediate responses
+
+responseTaskSequenceDepth
+
+Depth of task-level responses
+
+ Audio Specifications
+
+Sampling Rate: 8000 Hz
+
+Bit Depth: 16-bit
+
+Channels: Mono
+
+Encoding: PCM signed
+
+Voice Activity Detection (VAD)
+
+VAD ensures only meaningful (spoken) audio is transmitted:
+
+Captures audio in real-time
+
+Identifies speech segments
+
+Reduces unnecessary data transmission
+
+API Reference
+Constructor
+Copy
+javaCopyEditULCASocketClient(String serverUrl, String apiKey)
+Methods
+Method
+Description
+
+connect()
+
+Establish WebSocket connection
+
+startStream(...)
+
+Begin audio streaming
+
+stop(boolean)
+
+Stop the stream
+
+disconnect()
+
+Disconnect from server
+
+startContinuousAudioStreamingWithVAD()
+
+Start mic with VAD
+
+convertByteToInt16(byte[])
+
+Convert byte array to 16-bit short array
+
+toUnsignedBytes(short[])
+
+Convert short array to unsigned bytes
+
+WebSocket Events
+Event
+Trigger
+
+connect
+
+Connection successful
+
+disconnect
+
+Disconnected
+
+ready
+
+Server is ready to receive
+
+response
+
+ASR result received
+
+message
+
+General server message
+
+abort
+
+Server aborted task
+
+terminate
+
+Server terminated connection
+
+ Complete Example
+Copy
+javaCopyEditpublic static void main(String[] args) {
+
+    try {
+
+        ULCASocketClient client = new ULCASocketClient("YOUR_WS_URL", "YOUR_API_KEY");
+
+        client.connect();
+
+
+
+        // ASR task config
+
+        JSONObject asrTask = new JSONObject();
+
+        asrTask.put("taskType", "asr");
+
+
+
+        JSONObject config = new JSONObject();
+
+        config.put("serviceId", "YOUR_SERVICE_ID");
+
+        config.put("language", new JSONObject().put("sourceLanguage", "en"));
+
+        config.put("samplingRate", 8000);
+
+        config.put("audioFormat", "wav");
+
+        config.put("encoding", JSONObject.NULL);
+
+        asrTask.put("config", config);
+
+
+
+        JSONArray taskSequence = new JSONArray().put(asrTask);
+
+
+
+        // Streaming config
+
+        JSONObject streamConfig = new JSONObject();
+
+        streamConfig.put("responseFrequencyInSecs", 2.0);
+
+        streamConfig.put("responseTaskSequenceDepth", 1);
+
+
+
+        client.startStream(taskSequence, streamConfig);
+
+
+
+        System.out.println("Streaming started. Press Enter to stop...");
+
+        System.in.read();
+
+
+
+        client.stop(true);
+
+        client.disconnect();
+
+
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+
+    }
+
+}
+ Troubleshooting
+ Connection Issues
+
+Check serverUrl
+
+Validate your API key
+
+Ensure internet access
+
+ No ASR Output
+
+Confirm serviceId
+
+Check audio format (wav, 8000 Hz)
+
+Speak clearly/loud enough for VAD
+
+Debugging Tips
+
+Use console logs
+
+Add System.out.println in event handlers
+
+Watch server response events for error codes
+
+Previous
+Download Postman Collection
+Next
+Appendix
+
+Last updated 1 year ago

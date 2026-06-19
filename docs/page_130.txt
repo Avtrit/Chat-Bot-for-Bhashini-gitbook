@@ -1,0 +1,72 @@
+TITLE: Response Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/transliteration-config-call/response-payload#complete-payload-2
+
+Copy
+TRANSLITERATION CONFIG CALL
+Response Payload
+
+Request sent without configuration parameter
+Complete Payload
+Complete Payload
+
+Complete Payload shows the JSON structure of the content that is received when Integrator makes a ULCA Config Call without any configuration details as detailed in Tab 1 of Request Payload
+
+This response contains 3 major parameters listed below and detailed further down the section:
+
+languages
+
+pipelineResponseConfig
+
+pipelineInferenceAPIEndPoint
+
+Parameter: languages
+
+This parameter helps integrator to know what languages are available that can be used for the requested pipeline tasks in that sequence.
+
+For example, consider scenarios where Integrator requests for either:
+
+Individual Task i.e., Transliteration here
+
+For Single Tasks, the understanding is straight-forward that the languages appearing in the response corresponds to that task. e.g. 
+
+If the integrator wants to do only Transliteration, the languages appearing shows that Server can do Transliterationin these languages. In this case, parameters sourceLanguage and targetLanguageList means that for the languages appearing in targetLanguageList are the ones in which Server can do translation FROM the language that appear in sourceLanguage.
+
+Usual format of language for such cases is below:
+
+Supported Languages for requested Pipeline.
+
+Parameter: pipelineResponseConfig
+
+This parameter helps the integrator to obtain the Service ID for a particular task type and language(s) associated with that task.
+
+The task types appearing here will be the same as the ones that the integrator requested while sending the pipelineTasks parameter in Request Payload
+
+
+Say the language pair chosen is Bengali to Assamese.
+
+Integrator shall now obtain the Service ID correspondingly in the below manner:
+
+Obtain Service ID for doing ASR in Bengali. Line 6 from Dictionary of Line 5-14 below.
+
+Obtain Service ID for doing Translation from Bengali to Assamese. Line 49 from Dictionary of Line 48-55 below.
+
+Obtain Service ID for doing TTS in Assamese. Line 89 from Dictionary of Line 88-98 below.
+
+These Service IDs will be used in the Transliteration Compute Call.
+
+For each taskType in the response, there may appear additional configuration parameters that are specific to each taskType.
+
+ 
+
+Configuration Details and Service IDs for requested pipeline tasks.
+Parameter: pipelineInferenceAPIEndPoint
+
+This parameter helps the integrator to know the details of the Transliteration Compute Call. where to send (callbackURL parameter) and shall be sent along with the Authorization Key-Value pair received under inferenceApiKey parameter which will be used for authentication of the same.
+
+Details for Actual Inferencing.
+Previous
+Request Payload
+Next
+Transliteration Compute Call
+
+Last updated 1 year ago

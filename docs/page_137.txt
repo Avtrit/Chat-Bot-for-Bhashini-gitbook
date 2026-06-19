@@ -1,0 +1,41 @@
+TITLE: Transliteration Config Call | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/transliteration-config-call#additional-headers
+
+Copy
+Transliteration Config Call
+
+This page will help the integrator to get the details of each pipeline based on Pipeline ID. This page will detail out the API call, its parameters, understanding of the Input and Output Payloads.
+
+Endpoint: https://meity-auth.ulcacontrib.org/ulca/apis/v0/model/getModelsPipeline
+
+Additional Headers:
+
+userID
+
+ulcaApiKey
+
+Payload:
+
+Tab 1: JSON payload without any configuration parameters
+
+Tab 2: JSON payload with some configuration parameters
+
+Additional Headers
+
+Below is the understanding and process of obtaining the additional Headers that shall be sent to make the Pipeline Config API Call. These headers are used for uniquely identifying each integrator for a particular application and authenticate them for the API usage.
+
+userID: Uniquely identify the Integrator.
+ulcaApiKey: to Authenticate this particular userID
+
+Below is a screenshot from the Postman. Along with standard headers that are sent automatically, userID and ulcaApiKey are the additional parameters sent.
+
+Postman screenshot of additional parameters
+
+Both userID and ulcaApiKey can be obtained from the My Profile section after logging in.
+
+Previous
+Response Payload
+Next
+Request Payload
+
+Last updated 2 years ago

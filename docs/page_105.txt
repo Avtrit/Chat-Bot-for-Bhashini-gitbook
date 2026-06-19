@@ -1,0 +1,21 @@
+TITLE: OCR Modalities Overview | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/optical-character-recognition-call/ocr-modalities-overview#scenic-ocr
+
+Copy
+OPTICAL CHARACTER RECOGNITION CALL
+OCR Modalities Overview
+
+Optical Character Recognition (OCR) technologies are designed to process and interpret text from various input images. Depending on the nature of the input, OCR can be classified into 3 categories.
+
+Printed OCR
+Scenic OCR
+Handwritten OCR
+
+Each modality addresses distinct challenges associated with input image types, enabling comprehensive OCR solutions for a wide range of use cases.
+
+Previous
+Optical Character Recognition Call
+Next
+Request Payload
+
+Last updated 1 year ago

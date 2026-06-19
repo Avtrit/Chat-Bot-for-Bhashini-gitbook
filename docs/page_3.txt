@@ -1,0 +1,481 @@
+TITLE: Available Models for usage | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/available-models-for-usage
+
+Copy
+Available Models for usage
+
+This page provides the integrator with details about the models available for usage within Bhashini and the Service ID's to be utilized for the languages accordingly.
+
+The list below consists of Service ID's to be utilized, each Service ID helps connect with a specific model via the REST APIs of Bhashini. The Service ID's, task type supported by it (such as ASR, Translation, TTS, etc) and the languages supported by it are listed below.
+
+ASR
+Sl. No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+bhashini/iitm/asr-dravidian--gpu--t4
+
+Telugu, Kannada, Malayalam, Tamil
+
+IIT Madras
+
+2
+
+ai4bharat/conformer-hi-gpu--t4
+
+Hindi
+
+AI4Bharat
+
+3
+
+ai4bharat/conformer-multilingual-dravidian-gpu--t4
+
+Kannada, Malayalam, Tamil, Telugu
+
+AI4Bharat
+
+4
+
+ai4bharat/conformer-multilingual-indo_aryan-gpu--t4
+
+Hindi, Bengali, Marathi, Urdu, Odia, Punjabi, Gujarati, Sanskrit
+
+AI4Bharat
+
+5
+
+ai4bharat/whisper-medium-en--gpu--t4
+
+English
+
+AI4Bharat
+
+6
+
+bhashini/ai4bharat/conformer-multilingual-asr
+
+Assamese, Bengali, Bodo, Dogri, Gujarati, Hindi, Kannada, Kashmir, Goan Konkani, Maithili, Malayalam, Manipuri, Marathi, Nepali, Odia, Punjabi, Sanskrit, Santali, Sindhi, Tamil, Telugu, Urdu
+
+AI4Bharat
+
+7
+
+bhashini/iitm/asr-indoaryan--gpu--t4
+
+Gujarati, Odia, Hindi, Marathi, Punjabi, Bengali
+
+IIT Madras
+
+8
+
+bhashini/iitm/asr-misc--gpu--t4
+
+Bhojpuri, Urdu
+
+IIT Madras
+
+9
+
+bhashini/iisc/asr-mai-t4
+
+Maithili
+
+IISC
+
+10
+
+bhashini/iisc/asr-bho-t4
+
+Bhojpuri
+
+IISC
+
+Translation
+Sl. No
+Service ID
+Source Language(s) Supported
+Target Language(s) Supported
+Model Provider
+
+1
+
+bhashini/iiith/nmt-all
+
+Hindi, English, Assamese, Awadhi, Bengali, Bhojpuri, Braj, Bodo, Dogri, Konkani, Gondi, Gujarati, Hinglish, Ho, Kannada, Kashmiri, Khasi, Mizo, Maithili, Magahi, Malayalam, Marathi, Manipuri, Nepali, Oriya, Punjabi, Sanskrit, Santali, Sinhala, Sindhi, Tamil, Tulu, Telugu, Urdu, Kangri, Kashmiri
+
+Hindi, English, Assamese, Awadhi, Bengali, Bhojpuri, Braj, Bodo, Dogri, Konkani, Gondi, Gujarati, Hinglish, Ho, Kannada, Kashmiri, Khasi, Mizo, Maithili, Magahi, Malayalam, Marathi, Manipuri, Nepali, Oriya, Punjabi, Sanskrit, Santali, Sinhala, Sindhi, Tamil, Tulu, Telugu, Urdu, Kangri, Kashmiri
+
+IIIT Hyderabad
+
+2
+
+ai4bharat/indictrans-v2-all-gpu--t4
+
+English, Goan Konkani, Gujarati, Sanskrit, Telugu, Marathi, Hindi, Odia, Manipuri,  Malayalam, Assamese, Dogri, Santali, Tamil, Sindhi, Bengali, Kashmiri, Kannada, Nepali
+
+English, Goan Konkani, Gujarati, Sanskrit, Telugu, Marathi, Hindi, Odia, Manipuri, Malayalam, Assamese, Dogri, Santali, Tamil, Sindhi, Bengali, Kashmiri, Kannada, Nepali
+
+AI4Bharat
+
+3
+
+Bhashini/IIITH/Trans/V1
+
+Hindi, English, Telugu, Odia, Gujarati, Urdu,
+
+Punjabi, Hindi, English, Telugu, Urdu, Gujarati, Odia, Sindhi, Dogri, Kashmiri
+
+IIIT Hyderabad
+
+4
+
+iitb/trilingual-en_hi_mr-v1-gpu--t4
+
+English, Assamese, Marathi, Hindi
+
+Assamese, Hindi, Bodo, Nepali, English, Marathi, Maithili, Goan Konkani
+
+IIT Bombay
+
+5
+
+bhashini/aukbc/disco-nmt
+
+Malayalam, Hindi, Tamil
+
+Malayalam, Hindi, Tamil
+
+AUKBC
+
+6
+
+bhashini/cdac-noida/nmt
+
+English, Hindi, Tamil, Odia , Bengali
+
+English, Hindi, Tamil, Odia , Bengali
+
+CDAC-Noida
+
+7
+
+bhashini/cdac-pune/nmt
+
+English, Kannada, Gujarati,Malayalam
+
+English, Kannada, Gujarati, Malayalam
+
+CDAC-Pune
+
+8
+
+bhashini/ai4bharat/indictrans-v3
+
+Assamese, Bengali, English, Gujarati, Hindi, Kannada, Malayalam, Marathi, Nepali, Odia, Punjabi, Sanskrit, Tamil, Telugu, Urdu
+
+Assamese, Bengali, English, Gujarati, Hindi, Kannada, Malayalam, Marathi, Nepali, Odia, Punjabi, Sanskrit, Tamil, Telugu, Urdu
+
+AI4Bharat
+
+9
+
+bhashini/iitkhg/nmt
+
+Hindi
+
+Sanskrit
+
+IIT Kharagpur
+
+Transliteration
+Sl. No
+Service ID
+Source Language(s) Supported
+Target Language(s) Supported
+Model Provider
+
+1
+
+ai4bharat/indicxlit--cpu-fsv2
+
+English, Goan Konkani, Gujarati, Sanskrit, Telugu, Marathi, Hindi, Odia, Manipuri, Malayalam, Assamese, Dogri, Santali, Tamil, Sindhi, Bengali, Kashmiri, Kannada, Nepali, Punjabi, Maithili,  Urdu, Sinhala, Bodo,
+
+English, Goan Konkani, Gujarati, Sanskrit, Telugu, Marathi, Hindi, Odia, Manipuri, Malayalam, Assamese, Dogri, Santali, Tamil, Sindhi, Bengali, Kashmiri, Kannada, Nepali, Punjabi, Maithili, Urdu, Sinhala,  Bodo
+
+AI4Bharat
+
+TTS
+Sl. No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+Bhashini/IITM/TTS
+
+Assamese, Bengali, Bodo, Dogri, English, Gujarati, Hindi, Kannada, Goan Konkani, Maithili, Malayalam, Manipuri, Marathi, Nepali, Odia, Punjabi, Rajasthani, Sanskrit, Tamil, Telugu, Urdu, Santali (Devanagari Script), Sindhi(Devanagari Script), Kashmiri(Devanagari Script)
+
+IIT Madras
+
+2
+
+ai4bharat/indic-tts-coqui-dravidian-gpu--t4
+
+Malayalam, Kannada, Tamil, Telugu
+
+AI4Bharat
+
+3
+
+ai4bharat/indic-tts-coqui-indo_aryan-gpu--t4
+
+Hindi, Marathi, Assamese, Bengali, Gujarat, Odia, Rajasthani, Punjabi
+
+AI4Bharat
+
+4
+
+ai4bharat/indic-tts-coqui-misc-gpu--t4
+
+English, Manipuri, Bodo
+
+AI4Bharat
+
+5
+
+Bhashini/IISC/TTS
+
+Kannada, Telugu, English, Hindi, Marathi, Bengali, Gujarati, Maithili, Bhojpuri, Chhattisgarhi, Magahi
+
+IISC (SYSPIN)
+
+Audio Language Detection
+Sl. No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+bhashini/iitmandi/audio-lang-detection/gpu
+
+Assamese, Bengali, English, Hindi, Kannada, Gujarati, Malayalam, Marathi, Odia, Punjabi, Tamil, Telugu
+
+IIT Mandi
+
+2
+
+bhashini/ald
+
+Assamese, Bengali, English, Hindi, Kannada, Gujarati, Malayalam, Marathi, Odia, Punjabi, Tamil, Telugu
+
+-
+
+Text Language Detection
+Sl. No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+bhashini/indic-lang-detection-all
+
+Assamese, Bengali, Bodo, Dogri, English, Gujarati, Hindi, Kannada, Kashmiri, Konkani, Maithili, Malayalam, Manipuri, Marathi, Nepali, Oriya, Punjabi, Sanskrit, Santali, Sindhi, Tamil, Telugu, Urdu
+
+AI4Bharat
+
+2
+
+bhashini/iiiith/indic-lang-detection-all
+
+Assamese, Bengali, English, Gujarati, Hindi, Kannada, Malayalam, Manipuri, Marathi, Oriya, Punjabi, Tamil, Telugu, Urdu
+
+IIIT Hyderabad
+
+3
+
+bhashini/indic/tld
+
+Assamese(bng script), Bodo, Bangla, Dogri, English, Gujarati, Hindi, Kannada, Kashmiri, Konkani, Maithili, Malayalam, Manipuri, Marathi, Nepali, Odia, Punjabi, Sanskrit, Santali, Sindhi, Tamil, Telugu, Urdu
+
+-
+
+Named Entity Recognition
+Sl. No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+bhashini/iiith/ner
+
+Hindi, Urdu, Odia, Telugu
+
+IIIT Hyderabad
+
+2
+
+bhashini/ai4bharat/indic-ner
+
+Assamese, Bengali, Gujarati, Hindi, Kannada, Malayalam, Telugu, Marathi, Oriya, Punjabi, Tamil
+
+AI4Bharat
+
+3
+
+bhashini/aukbc/ner
+
+Hindi, Bengali, Marathi, Punjabi, Kannada, Malayalam, Tamil, English
+
+AUKBC
+
+OCR
+Sl. No
+Service ID
+Language(s) Supported
+Modality
+Model Provider
+
+1
+
+bhashini/iiith-ocr-sceneText-all
+
+Assamese, Bengali, Gujarati, Hindi, Kannada, Malayalam, Manipuri, Marathi, Oriya, Punjabi, Tamil, Telugu, Urdu
+
+Scene Text
+
+IIIT Hyderabad
+
+2
+
+bhashini/iiith/ocr-hw-bhaasha
+
+Bengali, Hindi, Malayalam, Marathi, Punjabi, Telugu, Kannada, Tamil
+
+Handwritten
+
+IIIT Hyderabad
+
+3
+
+bhashini/iiith-bhasha-ocr
+
+Assamese, Bengali, Bodo, Dogri, English, Gujarati, Hindi, Kannada, Kashmiri, Konkani, Maithali, Nepali, Malayalam, Manipuri, Marathi, Oriya, Punjabi, Sanskrit, Santali, Sindhi, Tamil, Telugu
+
+Printed Text
+
+IIIT Hyderabad
+
+Speaker Enrollment & Verification
+SI.No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+bhashini/iitdharwad/speaker-enrollment
+
+ All Languages
+
+IIT Dharwad 
+
+2
+
+bhashini/iitdharwad/speaker-verification
+
+All Languages
+
+IIT Dharwad
+
+Speaker Diarization
+SI.No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+bhashini/iisc/speaker-diarization
+
+All Languages
+
+IISC
+
+2
+
+bhashini/speaker-diarization
+
+All Languages
+
+Open Source
+
+Language Diarization
+S.No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+bhashini/nitk/language-diarization
+
+All Languages
+
+NITK
+
+Voice Cloning
+S.No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+bhashini/ai4b/indicf5-tts
+
+Assamese, Bengali, Gujarati, Hindi, Kannada, Malayalam, Marathi, Odia, Punjabi, Tamil, Telugu.
+
+AI4Bharat
+
+Lip Sync
+S.No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+bhashini/iitm/lip-sync
+
+All Languages
+
+IIT Madras
+
+KWS (Key-Word Spotting)
+S.No
+Service ID
+Language(s) Supported
+Model Provider
+
+1
+
+bhashini/iitg/kws
+
+Bengali, Manipuri, Mizo
+
+IIT Guwahati
+
+Previous
+Pre-requisites and Onboarding
+Next
+Pipeline Search Call
+
+Last updated 3 months ago

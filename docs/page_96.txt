@@ -1,0 +1,159 @@
+TITLE: Request payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/text-language-detection-compute-call/request-payload#parameter-inputdata
+
+Copy
+TEXT LANGUAGE DETECTION COMPUTE CALL
+Request payload
+
+This sub-page helps the integrator to understand various different types of request payload based on the individual task or combination of tasks in that sequence that integrator wants to do.
+
+Text Language Detection payload
+Copy
+	{
+
+	    "pipelineTasks": [
+
+	        {
+
+	            "taskType": "txt-lang-detection",
+
+	            "config": {
+
+	                "serviceId": "{{tld_service_id}}"
+
+	            }
+
+	        }
+
+	    ],
+
+	    "inputData": {
+
+	        "input": [
+
+	            {
+
+	                "source": "INSERT_TEXT_HERE"
+
+	            }
+
+	        ]
+
+	    }
+
+	}
+
+	
+
+This request contains 2 major parameters listed below and detailed further down the section:
+
+pipelineTasks
+
+inputData
+
+Parameter: pipelineTasks
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of taskType and config, that are to be done by the integrator. 
+In the above example, pipelineTasks takes only one dictionary (line 2-9) because integrator wants to do only text language detection.
+
+taskType parameter takes String that takes the value txt-lang-detection
+
+config is a single key parameter which maps to another object called serviceId.
+
+Service ID
+
+serviceId parameter identifies the specific service/trained model you want to use.
+
+For serviceId as "bhashini/indic-lang-detection-all", below are the supported languages-
+
+• Assamese 
+
+• Bengali 
+
+• Bodo 
+
+• Dogri 
+
+• English 
+
+• Gujarati 
+
+• Hindi 
+
+• Kannada 
+
+• Kashmiri 
+
+• Konkani 
+
+• Maithili 
+
+• Malayalam 
+
+• Manipuri 
+
+• Marathi 
+
+• Nepali 
+
+• Oriya 
+
+• Punjabi 
+
+• Sanskrit 
+
+• Santali 
+
+• Sindhi 
+
+• Tamil 
+
+• Telugu 
+
+• Urdu
+
+For serviceId as "bhashini/iiiith/indic-lang-detection-all", below are the supported languages-
+
+• Assamese 
+
+• Bengali 
+
+• English 
+
+• Gujarati 
+
+• Hindi 
+
+• Kannada 
+
+• Malayalam 
+
+• Manipuri 
+
+• Marathi 
+
+• Oriya 
+
+• Punjabi 
+
+• Tamil 
+
+• Telugu 
+
+• Urdu
+
+Parameter: inputData
+
+inputData Parameter takes the actual input from the integrator on which the individual task has to be done. It can take the input via source parameter .
+
+
+input text content can be added as a value for source paramater under inputData complex tag
+
+Previous
+Text Language Detection Compute Call
+Next
+Response Payload
+
+Last updated 1 year ago

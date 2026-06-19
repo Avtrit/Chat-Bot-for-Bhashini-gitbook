@@ -1,0 +1,185 @@
+TITLE: Request Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/optical-character-recognition-call/request-payload#parameter-inputdata
+
+Copy
+OPTICAL CHARACTER RECOGNITION CALL
+Request Payload
+
+This sub-page helps the integrator to understand various different types of request payload based on the individual task or combination of tasks in that sequence that integrator wants to do.
+
+Optical Character Recognition
+Copy
+{
+
+    "pipelineTasks": [
+
+        {
+
+            "taskType": "ocr",
+
+            "config": {
+
+                "language": {
+
+                    "sourceLanguage": "ta"
+
+                },
+
+                "serviceId": "{{ocr_service_id}}",
+
+                "textDetection":"False"
+
+            }
+
+        }
+
+    ],
+
+    "inputData": {
+
+        "image": [
+
+            {
+
+            "imageUri": "INSERT_IMAGE_URL_HERE"
+
+            "imageContent": "INSERT_BASE64_IMAGECONTENT_HERE"
+
+             
+
+            }
+
+        ]
+
+    }
+
+}
+
+This request contains 2 major parameters listed below and detailed further down the section:
+
+pipelineTasks
+
+inputData
+
+Parameter: pipelineTasks
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of taskType and config, that are to be done by the integrator. In the above example, pipelineTasks takes only one dictionary (line 2-9) because integrator wants to do only Audio language detection. taskType parameter takes String that takes the value ocr
+
+config is a single key parameter which maps to another object called serviceId
+
+sourceLanguage is a key parameter which defines the output language in which the texts displays
+
+textDetectionis a key parameter which decides whether to enable or disable the inbuilt preprocessor (word-detector). it is of a Boolean value. this parameter should be sent in request body when the service ID is bhashini/iiith-bhasha-ocr. 
+
+in other 2 cases, pre processor should be sent as word detector to retrieve a clear output text content.
+
+Service Id
+
+serviceId parameter identifies the specific service/trained model you want to use.
+
+The bhashini/iiith-bhasha-ocr serviceId is used for printed text images.
+
+For serviceId as "bhashini/iiith-bhasha-ocr", below are the supported languages-
+
+• Assamese
+
+• Bengali
+
+• English
+
+• Gujarati
+
+• Hindi
+
+• Kannada
+
+• Malayalam
+
+• Manipuri
+
+• Marathi
+
+• Oriya
+
+• Punjabi
+
+• Tamil
+
+• Telugu
+
+The bhashini/iiith-ocr-sceneText-all serviceId is used for scene text images.
+
+For serviceId as "bhashini/iiith-ocr-sceneText-all", below are the supported languages-
+
+• Assamese
+
+• Bengali
+
+• Gujarati
+
+• Hindi
+
+• Kannada
+
+• Malayalam
+
+• Manipuri
+
+• Marathi
+
+• Oriya
+
+• Punjabi
+
+• Tamil
+
+• Telugu
+
+• Urdu
+
+The bhashini/iiith-ocr-hw-all serviceId is used for hand written images.
+
+For serviceId as "bhashini/iiith-ocr-hw-all", below are the supported languages-
+
+• Assamese
+
+• Bengali
+
+• English
+
+• Gujarati
+
+• Hindi
+
+• Kannada
+
+• Malayalam
+
+• Manipuri
+
+• Marathi
+
+• Oriya
+
+• Punjabi
+
+• Tamil
+
+• Telugu
+
+• Urdu
+
+Parameter: inputData
+
+inputData Parameter takes the actual input from the integrator on which the individual task has to be done.  in this case, the input is taken via imageUri or imageContent (base64 format).
+
+either user can pass imageUri as input or imageContent as input.
+
+Previous
+OCR Modalities Overview
+Next
+Response Payload
+
+Last updated 1 year ago

@@ -1,0 +1,34 @@
+TITLE: Optical Character Recognition Call | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/optical-character-recognition-call
+
+Copy
+Optical Character Recognition Call
+
+This page will help the integrator to display the texts present in the image. This page will detail out the API call, its parameters, understanding of the Input and Output Payloads.
+
+Endpoint: https://dhruva-api.bhashini.gov.in/services/inference/pipeline
+
+Additional Headers:
+
+Below is the understanding and process of obtaining the additional Headers that shall be sent to make the Pipeline Config API Call. These headers are used for uniquely identifying each integrator for a particular application and authenticate them for the API usage.
+
+Accept: */*
+
+Authorization: INSERT_API_KEY_HERE
+
+Content-Type: application/json
+
+Authorization : it is a HTTP header which is used to authenticate the user and permission of the requester to use protected resources. Authorization key value can be obtained from the My Profile section under the App name -> inference API key value after logging in to Bhashini-Udyat.
+
+Accept : it is a HTTP header which is used to specify the types of content they can process. This helps the server understand what kind of response to send back.
+
+Content-Type : it is HTTP header which is used to indicate the media type of the resource being sent. This helps the user understand how to process the content.
+
+Below is a screenshot from the Postman. Along with standard headers that are sent automatically, Authorization, Accept and Content-Type are the additional parameters sent.
+
+Previous
+Response Payload
+Next
+OCR Modalities Overview
+
+Last updated 1 year ago

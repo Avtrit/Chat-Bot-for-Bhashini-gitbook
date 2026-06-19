@@ -1,0 +1,101 @@
+TITLE: Request Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/transliteration-compute-call/request-payload#parameter-pipelinetasks
+
+Copy
+TRANSLITERATION COMPUTE CALL
+Request Payload
+
+This sub-page helps the integrator to understand various different types of request payload based on the individual task or combination of tasks in that sequence that integrator wants to do.
+
+Request Payload for Transliteration Task
+Transliteration
+Copy
+	
+
+	{
+
+	    "pipelineTasks": [
+
+	        {
+
+	            "taskType": "transliteration",
+
+	            "config": {
+
+	                "language": {
+
+	                    "sourceLanguage": "en",
+
+	                    "targetLanguage": "hi"
+
+	                },
+
+	                "serviceId": "{{trans_service_id}}",
+
+	                "isSentence": false,
+
+	                "numSuggestions": 7
+
+	            }
+
+	        }
+
+	    ],
+
+	    "inputData": {
+
+	        "input": [
+
+	            {
+
+	                "source": "ki"
+
+	            }
+
+	        ]
+
+	    }
+
+	}
+
+	
+
+This response contains 2 major parameters listed below and detailed further down the section:
+
+pipelineTasks
+
+inputData
+
+Parameter: pipelineTasks
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of taskType and config, that are to be done by the integrator. 
+In the above example, pipelineTasks takes only one dictionary (line 3-13) because integrator wants to do only ASR.
+
+taskType parameter takes String that takes the value asr
+
+config parameter takes a Dictionary that contains following parameters:
+
+Language
+Service ID
+isSentence
+numSuggestions
+
+For ASR, language parameter only takes sourceLanguage which accepts ISO-639 Series Code of the language.
+
+Parameters other than taskType, serviceId and config are optional.
+
+Parameter: inputData
+
+inputData Parameter takes the actual input from the integrator on which the individual task has to be done. It can take the input either via input parameter .
+
+
+input parameter takes the text in source key
+
+Previous
+Transliteration Compute Call
+Next
+Response Payload
+
+Last updated 1 year ago

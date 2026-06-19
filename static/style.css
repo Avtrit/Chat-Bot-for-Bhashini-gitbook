@@ -1,0 +1,964 @@
+/* ==========================================================================
+   RETRO 90S WINDOWS 95 DESIGN SYSTEM
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Courier+New&family=Comic+Sans+MS&family=MS+Sans+Serif&display=swap');
+
+:root {
+    /* Windows 95 Classic Color Palette */
+    --win-bg: #c0c0c0;
+    --win-desktop: #008080;
+    /* Classic Teal Desktop */
+    --win-face: #c0c0c0;
+    --win-shadow: #808080;
+    --win-darkshadow: #404040;
+    --win-light: #ffffff;
+    --win-blue-start: #000080;
+    /* Active Titlebar Dark Blue */
+    --win-blue-end: #1084d0;
+    --win-text: #000000;
+    --win-input-bg: #ffffff;
+
+    --font-system: "MS Sans Serif", "Tahoma", "Geneva", "Arial", sans-serif;
+    --font-retro-heading: "Times New Roman", Times, serif;
+    --font-retro-fun: "Comic Sans MS", "Chalkboard SE", "Comic Sans", sans-serif;
+    --font-retro-code: "Courier New", Courier, monospace;
+}
+
+/* ==========================================================================
+   RESET & RETRO BASE STYLES
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    image-rendering: pixelated;
+    /* Pixels! */
+}
+
+body {
+    background-color: var(--win-desktop);
+    color: var(--win-text);
+    font-family: var(--font-system);
+    font-size: 13px;
+    height: 100vh;
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Win95 3D Border Effects */
+.border-outset {
+    border-top: 2px solid var(--win-light);
+    border-left: 2px solid var(--win-light);
+    border-right: 2px solid var(--win-shadow);
+    border-bottom: 2px solid var(--win-shadow);
+    box-shadow: 1px 1px 0 0 var(--win-darkshadow);
+}
+
+.border-inset {
+    border-top: 2px solid var(--win-shadow);
+    border-left: 2px solid var(--win-shadow);
+    border-right: 2px solid var(--win-light);
+    border-bottom: 2px solid var(--win-light);
+    box-shadow: -1px -1px 0 0 var(--win-darkshadow) inset;
+}
+
+/* Scrollbar Styling (Classic chunky Win95 scrolls) */
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: #dfdfdf;
+    border: 1px inset #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--win-face);
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    box-shadow: 1px 1px 0 0 #000;
+}
+
+::-webkit-scrollbar-button {
+    background: var(--win-face);
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    box-shadow: 1px 1px 0 0 #000;
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+
+/* ==========================================================================
+   LAYOUT STRUCTURE
+   ========================================================================== */
+.app-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    max-height: 900px;
+    background-color: var(--win-bg);
+    padding: 3px;
+
+    /* Outset frame for main desktop window */
+    border-top: 2px solid var(--win-light);
+    border-left: 2px solid var(--win-light);
+    border-right: 2px solid var(--win-shadow);
+    border-bottom: 2px solid var(--win-shadow);
+    box-shadow: 1px 1px 0 0 var(--win-darkshadow), 2px 2px 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   SIDEBAR (CONTROL PANEL WINDOW)
+   ========================================================================== */
+.sidebar {
+    width: 280px;
+    background-color: var(--win-bg);
+    display: flex;
+    flex-direction: column;
+    margin-right: 4px;
+    border-top: 1px solid var(--win-light);
+    border-left: 1px solid var(--win-light);
+    border-right: 2px solid var(--win-shadow);
+    border-bottom: 2px solid var(--win-shadow);
+    padding: 6px;
+}
+
+.sidebar-header {
+    background: linear-gradient(90deg, var(--win-blue-start) 0%, var(--win-blue-end) 100%);
+    color: #ffffff;
+    padding: 3px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border: 1px outset #fff;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.logo-icon {
+    font-size: 14px;
+    color: #ffff00;
+    animation: spin 3s infinite linear;
+}
+
+.logo-text h2 {
+    font-family: var(--font-retro-heading);
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.logo-text span {
+    font-size: 9px;
+    text-transform: uppercase;
+    color: #dfdfdf;
+    display: block;
+    margin-top: -2px;
+}
+
+.close-sidebar-btn {
+    background: var(--win-bg);
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    box-shadow: 0.5px 0.5px 0 0 #000;
+    width: 16px;
+    height: 14px;
+    font-size: 9px;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.close-sidebar-btn:active {
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    box-shadow: none;
+}
+
+.sidebar-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Config Group Box Panel */
+.config-section {
+    border: 2px groove #fff;
+    padding: 10px;
+    margin-top: 6px;
+    position: relative;
+    background-color: var(--win-bg);
+}
+
+.config-section h3 {
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    background-color: var(--win-bg);
+    padding: 0 6px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-group label {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Win95 Form Elements */
+select,
+input[type="text"] {
+    background-color: var(--win-input-bg);
+    color: var(--win-text);
+    font-family: var(--font-system);
+    font-size: 12px;
+    padding: 3px 5px;
+    outline: none;
+
+    border-top: 2px solid var(--win-shadow);
+    border-left: 2px solid var(--win-shadow);
+    border-right: 2px solid var(--win-light);
+    border-bottom: 2px solid var(--win-light);
+    box-shadow: -1px -1px 0 0 var(--win-darkshadow) inset;
+}
+
+select:focus,
+input[type="text"]:focus {
+    border: 2px solid #000080;
+}
+
+/* Win95 Range Slider Style */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    margin: 5px 0;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background: var(--win-shadow);
+    border: 1px inset #fff;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    height: 18px;
+    width: 10px;
+    background: var(--win-bg);
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    box-shadow: 1px 1px 0 0 #000;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -7px;
+}
+
+.help-text {
+    font-size: 10px;
+    color: #404040;
+    font-style: italic;
+}
+
+/* System Status Sidebar Box */
+.status-box {
+    background: #dedede;
+    border: 2px inset #fff;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px dotted #808080;
+    font-size: 11px;
+}
+
+.status-item:last-child {
+    border-bottom: none;
+}
+
+.status-label {
+    font-weight: bold;
+}
+
+.status-value {
+    color: #000080;
+}
+
+.status-value.monospace {
+    font-family: var(--font-retro-code);
+}
+
+.text-green {
+    color: #008000 !important;
+    font-weight: bold;
+    text-shadow: 0.5px 0.5px #fff;
+}
+
+/* Win95 standard push button */
+.btn {
+    background-color: var(--win-bg);
+    color: var(--win-text);
+    font-family: var(--font-system);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 12px;
+    cursor: pointer;
+    outline: none;
+
+    border-top: 2px solid var(--win-light);
+    border-left: 2px solid var(--win-light);
+    border-right: 2px solid var(--win-shadow);
+    border-bottom: 2px solid var(--win-shadow);
+    box-shadow: 1px 1px 0 0 var(--win-darkshadow);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn:active {
+    border-top: 2px solid var(--win-shadow);
+    border-left: 2px solid var(--win-shadow);
+    border-right: 2px solid var(--win-light);
+    border-bottom: 2px solid var(--win-light);
+    box-shadow: -1px -1px 0 0 var(--win-darkshadow) inset;
+    padding: 6px 11px 4px 13px;
+    /* shift text down-right slightly */
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.sidebar-footer {
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   MAIN CHAT WINDOW (RETRO MS CHAT STYLE)
+   ========================================================================== */
+.chat-area {
+    flex-grow: 1;
+    background-color: var(--win-bg);
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    border-top: 1px solid var(--win-light);
+    border-left: 1px solid var(--win-light);
+    border-right: 2px solid var(--win-shadow);
+    border-bottom: 2px solid var(--win-shadow);
+}
+
+.chat-header {
+    background: linear-gradient(90deg, var(--win-blue-start) 0%, var(--win-blue-end) 100%);
+    color: #ffffff;
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    border: 1px outset #fff;
+    margin-bottom: 4px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-left h1 {
+    font-family: var(--font-retro-heading);
+    font-size: 15px;
+}
+
+.menu-toggle-btn {
+    display: none;
+    /* Only desktop layout */
+}
+
+.connection-pill {
+    background-color: #000;
+    border: 1px inset #fff;
+    padding: 1px 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    font-family: var(--font-retro-code);
+}
+
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    animation: blink 1s infinite steps(2);
+}
+
+.docs-link {
+    color: #ffff00;
+    text-decoration: underline;
+    font-size: 11px;
+}
+
+.docs-link:hover {
+    color: #ff00ff;
+}
+
+/* Messages container box */
+.messages-container {
+    flex-grow: 1;
+    background-color: var(--win-input-bg);
+    overflow-y: auto;
+    padding: 10px;
+    margin-bottom: 4px;
+    position: relative;
+
+    /* 3D Inset to look like Notepad text field */
+    border-top: 2px solid var(--win-shadow);
+    border-left: 2px solid var(--win-shadow);
+    border-right: 2px solid var(--win-light);
+    border-bottom: 2px solid var(--win-light);
+    box-shadow: -1px -1px 0 0 var(--win-darkshadow) inset;
+}
+
+/* ==========================================================================
+   WELCOME SCREEN (GEOCITIES / 90s HOME PAGE STYLE)
+   ========================================================================== */
+.welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px;
+    text-align: center;
+    font-family: var(--font-retro-heading);
+    background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 10px, #ffffff 10px, #ffffff 20px);
+    border: 3px double var(--win-shadow);
+    margin: 10px;
+}
+
+.welcome-icon {
+    font-size: 48px;
+    color: #0000ff;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 0px #c0c0c0;
+    animation: bounce 1.5s infinite ease-in-out;
+}
+
+.welcome-screen h2 {
+    font-size: 22px;
+    color: #800000;
+    /* Dark red retro title */
+    margin-bottom: 10px;
+    font-weight: 900;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+.welcome-screen p {
+    font-size: 13px;
+    max-width: 500px;
+    margin-bottom: 20px;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Geocities Suggestion Cards Grid */
+.suggestion-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.suggestion-card {
+    background-color: var(--win-bg);
+    border: 2px outset #fff;
+    padding: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-system);
+}
+
+.suggestion-card:hover {
+    background-color: #000080;
+    color: #ffffff;
+    border: 2px inset #fff;
+}
+
+.suggestion-card h4 {
+    font-size: 12px;
+    margin-bottom: 4px;
+    text-decoration: underline;
+}
+
+.suggestion-card p {
+    font-size: 10px;
+    font-weight: normal;
+    color: inherit;
+}
+
+.suggestion-card:hover p {
+    color: #dfdfdf;
+}
+
+/* ==========================================================================
+   CHAT DIALOGUE & MESSAGES
+   ========================================================================== */
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message-bubble {
+    display: flex;
+    gap: 10px;
+    max-width: 90%;
+}
+
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.bot-message,
+.assistant-message {
+    align-self: flex-start;
+}
+
+/* Message Avatar */
+.avatar {
+    width: 32px;
+    height: 32px;
+    background-color: var(--win-bg);
+    border: 2px outset #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #000;
+    flex-shrink: 0;
+}
+
+.user-message .avatar {
+    background-color: #008080;
+    color: #fff;
+}
+
+.message-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.message-header {
+    display: flex;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #808080;
+    padding: 0 4px;
+}
+
+.user-message .message-header {
+    flex-direction: row-reverse;
+}
+
+.sender-name {
+    color: #000080;
+}
+
+.timestamp {
+    font-weight: normal;
+}
+
+/* Message Text Box (Retro 3D panel) */
+.message-text {
+    background-color: #f5f5f5;
+    border: 1px solid #808080;
+    padding: 8px 12px;
+    color: #000000;
+    font-size: 12px;
+    font-family: var(--font-system);
+    line-height: 1.5;
+}
+
+.user-message .message-text {
+    background-color: #e0f0f0;
+    border-left: 3px solid #008080;
+}
+
+.bot-message .message-text {
+    background-color: #fffffa;
+    border-left: 3px solid #800080;
+}
+
+/* Markdown formatting within retro context */
+.message-text p {
+    margin-bottom: 8px;
+}
+
+.message-text p:last-child {
+    margin-bottom: 0;
+}
+
+.message-text strong {
+    font-weight: bold;
+    color: #800000;
+}
+
+/* Retro Code block */
+.message-text pre {
+    background-color: #000000;
+    color: #00ff00;
+    /* Green terminal output! */
+    font-family: var(--font-retro-code);
+    font-size: 11px;
+    padding: 8px;
+    margin: 8px 0;
+    overflow-x: auto;
+    border: 2px inset #fff;
+}
+
+.message-text code {
+    font-family: var(--font-retro-code);
+    background-color: #e8e8e8;
+    color: #a00000;
+    padding: 1px 3px;
+    font-size: 11px;
+}
+
+.message-text pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+}
+
+.message-text ul,
+.message-text ol {
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+
+.message-text li {
+    margin-bottom: 4px;
+}
+
+/* ==========================================================================
+   SOURCES DRAWER (WIN95 PROPERTIES ACCORDION)
+   ========================================================================== */
+.sources-card {
+    margin-top: 10px;
+    border: 2px outset #fff;
+    background-color: var(--win-bg);
+}
+
+.sources-header {
+    background-color: var(--win-bg);
+    padding: 4px 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--win-shadow);
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.sources-header:hover {
+    background-color: #dfdfdf;
+}
+
+.sources-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #000;
+}
+
+.sources-icon {
+    font-size: 10px;
+    transition: transform 0.1s;
+}
+
+/* Accordion Open State */
+.sources-card.open .sources-icon {
+    transform: rotate(180deg);
+}
+
+.sources-content {
+    display: none;
+    padding: 6px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #dfdfdf;
+}
+
+.sources-card.open .sources-content {
+    display: block;
+    border-top: 1px solid #ffffff;
+}
+
+.source-item {
+    background-color: #ffffff;
+    border: 1px inset #fff;
+    padding: 6px;
+    margin-bottom: 6px;
+    font-size: 11px;
+}
+
+.source-item:last-child {
+    margin-bottom: 0;
+}
+
+.source-meta {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted #808080;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    font-weight: bold;
+    color: #800080;
+}
+
+.source-snippet {
+    font-family: var(--font-retro-code);
+    white-space: pre-wrap;
+    font-size: 10px;
+    color: #333333;
+}
+
+/* ==========================================================================
+   CHAT INPUT BAR PANEL
+   ========================================================================== */
+.input-panel {
+    background-color: var(--win-bg);
+    padding: 6px;
+    border-top: 2px groove #fff;
+}
+
+.chat-form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 6px;
+}
+
+/* Notepad style text editor input */
+textarea#user-input {
+    flex-grow: 1;
+    background-color: var(--win-input-bg);
+    color: var(--win-text);
+    font-family: var(--font-system);
+    font-size: 13px;
+    padding: 6px;
+    resize: none;
+    outline: none;
+    min-height: 32px;
+    max-height: 100px;
+
+    border-top: 2px solid var(--win-shadow);
+    border-left: 2px solid var(--win-shadow);
+    border-right: 2px solid var(--win-light);
+    border-bottom: 2px solid var(--win-light);
+    box-shadow: -1px -1px 0 0 var(--win-darkshadow) inset;
+}
+
+textarea#user-input:focus {
+    border: 2px solid #000080;
+}
+
+/* Custom Outset Send Button */
+.send-btn {
+    background-color: var(--win-bg);
+    color: var(--win-text);
+    font-family: var(--font-system);
+    font-weight: bold;
+    font-size: 13px;
+    width: 64px;
+    cursor: pointer;
+    outline: none;
+
+    border-top: 2px solid var(--win-light);
+    border-left: 2px solid var(--win-light);
+    border-right: 2px solid var(--win-shadow);
+    border-bottom: 2px solid var(--win-shadow);
+    box-shadow: 1px 1px 0 0 var(--win-darkshadow);
+}
+
+.send-btn:active {
+    border-top: 2px solid var(--win-shadow);
+    border-left: 2px solid var(--win-shadow);
+    border-right: 2px solid var(--win-light);
+    border-bottom: 2px solid var(--win-light);
+    box-shadow: -1px -1px 0 0 var(--win-darkshadow) inset;
+}
+
+.input-meta {
+    font-size: 10px;
+    color: #404040;
+    text-align: left;
+    font-family: var(--font-system);
+}
+
+/* ==========================================================================
+   LOADING BUBBLE (Win95 Hourglass Loader)
+   ========================================================================== */
+.loading-bubble {
+    display: none;
+    gap: 10px;
+    align-self: flex-start;
+}
+
+.loading-bubble.active {
+    display: flex;
+}
+
+.loading-avatar {
+    width: 32px;
+    height: 32px;
+    background-color: var(--win-bg);
+    border: 2px outset #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #000;
+}
+
+.loading-content {
+    background-color: #fffffa;
+    border: 1px solid #808080;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+}
+
+.loading-dots {
+    display: inline-flex;
+    gap: 3px;
+}
+
+.loading-dots span {
+    width: 4px;
+    height: 4px;
+    background-color: #000;
+    animation: pulse 1s infinite alternate;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* ==========================================================================
+   RETRO KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes blink {
+
+    0%,
+    49% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes pulse {
+    from {
+        opacity: 0.2;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive sidebar drawer for smaller screens */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 4px;
+    }
+}

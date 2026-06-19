@@ -1,0 +1,95 @@
+TITLE: Overall Understanding of the API Calls | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis#when-to-use-which-pipeline-id
+
+Copy
+Overall Understanding of the API Calls
+
+This page will help the integrator understand the number of calls that are to be made to do any specific number of tasks that may or may not include Speech Recognition, Translation and Text to Speech.
+
+This Bhashini Documentation has been written by Bhashini Team. Please reach out to Bhashini Team on email id (digitalindiabhashinidivision@gmail.com), if you face issues implementing the APIs.
+
+Please refer to Appendix for details on full forms.
+
+What models are available on ULCA?
+
+Our Research and Development groups which comprises of different renowned institutes of India like IIT(s), IIIT(s), CDAC etc. have developed models which can do Speech Recognition, Translations, Text to Speech, Optical Character Recognition and many more for Indian languages. Our ULCA Platform exposes these AI/ML models (each identified with an unique Model ID) and a try out page through which integrators can try these models.
+
+Bhashini
+bhashini.gov.in
+ULCA Repository of Models
+
+Multiple models could be available that may have similar functionality. For ex. To do Speech Recognition of Hindi language, there may be multiple models available from different institute each uniquely identified by a model ID.
+
+What is a ULCA pipeline?
+
+ULCA Pipeline is a set of tasks that any specific pipeline supports. For example, any specific pipeline (identified by unique pipeline ID) can support the following:
+
+What is Pipeline ID?
+
+
+
+
+Another pipeline P2, may support only following Tasks and Task Sequences:
+[NMT]
+[TTS]
+[NMT+TTS]
+
+When to use which Pipeline ID?
+
+Consider Bhashini provides a few pipelines (pipeline ID: P1, P2, etc.) that supports some Tasks and Task Sequences.
+
+Case 1:
+If the use case is to do only Translation where an integrator wants to translate a given sentence from one language to another in their app/project. For this use case, a pipeline which supports [NMT] shall be used. Since pipeline P1 and P2 both supports [NMT] task, either P1 or P2 can be used.
+
+Case 2:
+Consider another use case, where integrator would also want its users to be able to hear the output along with reading which would require both NMT and TTS to be done on the input text, integrator will need a pipeline that supports [NMT+TTS]. Since pipeline P1 and P2 both supports [NMT+TTS], either P1 or P2 can be used.
+
+Case 3:
+Consider yet another use case, where integrator wants to take the input in the form of voice and provide a translated text from one language to another. Integrator will, in this case, needs a pipeline which supports [ASR+NMT]. Since only Pipeline P1 supports ASR and NMT together, only P1 can be used.
+
+Case 4:
+Consider yet another use case, where the integrator wants to utilize ASR from Pipeline P1 and [NMT] from Pipeline P2. The integrator can achieve this as long as both pipelines point to the same API endpoint and are accessible with the same Authorization Keys.
+
+Now, from Case 1 and 2, question arises, which one to use, since both are able to do the required task?
+Integrators will have a detailed description of the capabilities of the pipeline, the models used in those pipelines, domains to which this pipeline may cater well. e.g. Certain pipelines are made for Medical Domain compared to some other pipeline which may cater to Agriculture domain better.
+Along with description, there is a Search Pipeline API call as well which provides similar information for automation purposes.
+Based on the understanding obtained from the portal as well as information obtained from the API, the integrator shall be able to determine which pipeline ID to use if multiple pipelines are available which does the same Tasks/Task Sequences.
+
+Each of these pipelines are uniquely identified by Pipeline ID.
+
+Each pipeline can support multiple and/or combination of tasks.
+
+In each of the Task Sequences, order/sequence of tasks is important. e.g. If a pipeline supports [ASR+NMT+TTS], it will mean that on the input received, first speech recognition will be done, then it will be translated to another language following which Speech in the target language will be generated.
+
+Flow of API calls
+
+Integrator shall do following calls to get the output.
+
+Pipeline Search API Call [Optional] 
+
+Pipeline Search API Call helps the integrator to search for pipelines that are available to do specific Tasks or Task Sequences and can be used to filter pipeline search based on different parameters.
+
+Integrators will be able to obtain Pipeline IDs required for their project using this call.  
+
+Pipeline Config Call [Mandatory]
+
+Once the integrator obtains the Pipeline ID either via Search Call or ULCA web portal, Pipeline Config call shall be sent to Bhashini along with the specific Task/Task Sequence that integrator want to do using this pipeline. Integrator should make sure that the sequence they are sending shall be supported by this pipeline.
+There are additional configuration parameters which integrators may or may not send to further filter the response of this config call.
+
+Pipeline Compute Call [Mandatory]
+
+Pipeline Compute Call is the final call that will help the integrator to obtain the output of the pipeline task sent.
+
+Language Codes
+
+Throughout the APIs, Integrators will see that languages are referred by their language codes. For ex. Language Code for Hindi is hi, English is en, and so on.
+
+
+Bhashini follows ISO-639 series of language codes.
+
+Usage of these APIs shall be for the purposes of PoC only. If the Bhashini Sahyogi, Bhashini App Mitra or Bhashini Udyat Mitra wants to use the same on production systems or integrators are charging end-users, please reach out to Bhashini team for the paid version of the APIs and exploring Pricing Plans.
+
+Next
+Pre-requisites and Onboarding
+
+Last updated 1 year ago

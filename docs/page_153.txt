@@ -1,0 +1,305 @@
+TITLE: Request Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/pipeline-compute-call/request-payload#parameter-inputdata-1
+
+Copy
+PIPELINE COMPUTE CALL
+Request Payload
+
+This sub-page helps the integrator to understand various different types of request payload based on the individual task or combination of tasks in that sequence that integrator wants to do.
+
+Request Payload for Individual Task
+ASR
+Translation
+TTS
+Copy
+	{
+
+	    "pipelineTasks": [
+
+	        {
+
+	            "taskType": "asr",
+
+	            "config": {
+
+	                "language": {
+
+	                    "sourceLanguage": "xx"
+
+	                },
+
+	                "serviceId": "xxxxx--ssssss-d-ddd--dddd",
+
+	                "audioFormat": "wav",
+
+	                "samplingRate": 16000,
+
+	                "preProcessors": [
+
+	                    "vad"
+
+	                ],
+
+	                "postProcessors": [
+
+	                    "itn"
+
+	                ]
+
+	            }
+
+	        }
+
+	    ],
+
+	    "inputData": {
+
+	        "input": [
+
+	            {
+
+	                "source": null
+
+	            }
+
+	        ],
+
+	        "audio": [
+
+	            {
+
+	                "audioContent": "{{generated_base64_content}}"
+
+	            }
+
+	        ]
+
+	    }
+
+	}
+
+This response contains 2 major parameters listed below and detailed further down the section:
+
+pipelineTasks
+
+inputData
+
+Parameter: pipelineTasks
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of taskType and config, that are to be done by the integrator. 
+In the above example, pipelineTasks takes only one dictionary (line 3-13) because integrator wants to do only ASR.
+
+taskType parameter takes String that takes the value asr
+
+config parameter takes a Dictionary that contains following parameters:
+
+Language
+Service ID
+Audio Format
+Sampling Rate
+
+For ASR, language parameter only takes sourceLanguage which accepts ISO-639 Series Code of the language.
+
+Parameters other than taskType, serviceId and config are optional.
+
+Parameter: inputData
+
+inputData Parameter takes the actual input from the integrator on which the individual task has to be done. It can take the input either via input parameter or audio parameter depending on the task to be done.
+Since ASR is done on audio input data, for ASR, 
+
+input parameter is optional, of no use for ASR but
+
+audio parameter is mandatory.
+
+audio parameter takes audioContent parameter which accepts base64 String of the actual audio captured. 
+
+If audioFormat or/and samplingRate parameter is/are sent, integrator should make sure that these values correspond to the actual recorded audio.
+
+Request Payload for Combination of Tasks in specific sequence
+ASR+Translation
+Translation+TTS
+ASR+Translation+TTS
+Copy
+	{
+
+	    "pipelineTasks": [
+
+	        {
+
+	            "taskType": "asr",
+
+	            "config": {
+
+	                "language": {
+
+	                    "sourceLanguage": "xx"
+
+	                },
+
+	                "serviceId": "xxxxx--ssssss-d-ddd--dddd",
+
+	                "audioFormat": "flac",
+
+	                "samplingRate": 16000
+
+	            }
+
+	        },
+
+	        {
+
+	            "taskType": "translation",
+
+	            "config": {
+
+	                "language": {
+
+	                    "sourceLanguage": "xx",
+
+	                    "targetLanguage": "yy"
+
+	                },
+
+	                "serviceId": "xxxxx--ssssss-d-ddd--mfkds"
+
+	            }
+
+	        }
+
+	    ],
+
+	    "inputData": {
+
+	        "input": [
+
+	            {
+
+	                "source": null
+
+	            }
+
+	        ],
+
+	        "audio": [
+
+	            {
+
+	                "audioContent": "{{generated_base64_content}}"
+
+	            }
+
+	        ]
+
+	    }
+
+	}
+Parameter: pipelineTasks
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of taskType and config, that are to be done by the integrator. 
+In the above example, pipelineTasks takes two dictionaries:
+
+Line 3 to 13 i.e., ASR Dictionary
+
+Line 14 to 23 i.e., Translation Dictionary
+
+because integrator wants to do ASR of the input voice followed by Translation of the digital text. 
+
+Line Number 7 and Line Number 18 are connected with below understanding. Consider a use-case described below:
+
+Integrator wants to speak in say Hindi language and wants to see the translated output in Marathi. For this to happen, integrator has to:
+
+Convert the Audio integrator has spoken to digital text i.e., ASR of Hindi
+
+Translate this digital Hindi text to Marathi digital text i.e., Translation from Hindi to Marathi
+
+Therefore, the language code for ASR that is to be inserted in Line 7, shall be hi, i.e., ISO 639 series code for Hindi. Once this Hindi digital text is generated, the same shall be translated to Marathi, therefore the source language code for Translation that is to be inserted in Line 18, shall also be hi, which means that language code in Line 7 and Line 18 shall be same. 
+
+For Target Language the code to be inserted in Line 19 shall be mr, i.e., ISO 639 series code for Marathi.  
+
+Understanding of all other parameters remains same as described above in Request Payload for Individual Task.
+
+Pre-Processors and Post-Processors within Compute Request
+ASR
+Translation
+TTS
+
+In Automatic Speech Recognition (ASR) systems, preprocessors and postprocessors play a crucial role in refining the audio input and enhancing the textual output, respectively. Below, we provide details on the available preprocessors and postprocessors, along with an example of how to configure them in your request body.
+
+Preprocessors
+
+Voice Activity Detection (VAD)
+
+Syntax: "preProcessors": ["vad"]
+
+Function: VAD allows audio content longer than 30 seconds to be passed and processed. It helps identify voice activity to ensure that only the detected voice activity is processed, reducing the load and improving the efficiency of the ASR system.
+
+Denoiser
+
+Syntax: "preProcessors": ["denoiser"]
+
+Function: Denoiser helps in improving the accuracy of speech recognition by reducing background noise from audio inputs.
+
+Postprocessors
+
+Hotwords
+
+Syntax: "postProcessors": [{"hotword_list":["पत्रिका"]}]
+
+Function: A hotword is postprocessor allows users to share a list of keyword or phrase in which the system is trained to recognize with higher priority or accuracy. This helps in enhancing the ASR performance. This feature is only applicable for Hindi and for service Id "bhashini/ai4bharat/conformer-multilingual-asr".
+
+       Example:  a Hindi news broadcast where words like "पत्रिका" (Magazine) are frequently mentioned. Adding these as hotwords ensures they are transcribed correctly rather than being replaced by phonetically similar but incorrect words
+
+ Inverse Text Normalization (ITN)
+
+Syntax: "postProcessors": ["itn"]
+
+Function: ITN converts spoken numbers and dates into their written forms. For example, the ASR would output "two thousand and twenty three" as "2023".
+
+Punctuation
+
+Syntax: "postProcessors": ["punctuation"]
+
+Function: This postprocessor adds punctuations to the ASR output, making the text more readable and closer to natural written language.
+
+Example:
+
+ASR Output: "hello how are you"
+
+Punctuation Output: "Hello, how are you?"
+
+The configuration of preprocessors and postprocessors can be included within the config section of the request body as shown below:
+
+Copy
+	"config": {
+
+	    "language": {
+
+	        "sourceLanguage": "xx"
+
+	    },
+
+	    "serviceId": "xxxxx--ssssss-d-ddd--dddd",
+
+	    "audioFormat": "flac",
+
+	    "samplingRate": 16000,
+
+	    "preProcessors": ["vad"],
+
+	    "postProcessors": [{
+
+	                    "hotword_list": ["पत्रिका", "रंगकर्म", "फिक्र"]
+
+	                }, "itn", "punctuation"]
+
+	}
+Previous
+Pipeline Compute Call
+Next
+Response Payload
+
+Last updated 8 months ago

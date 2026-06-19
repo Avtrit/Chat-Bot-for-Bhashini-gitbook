@@ -1,0 +1,131 @@
+TITLE: Request Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/pipeline-config-call/request-payload#config-1
+
+Copy
+PIPELINE CONFIG CALL
+Request Payload
+
+This sub-page helps the integrator to understand two different types of request payload, one without any additional configuration parameters, and one with additional configuration parameters.
+
+Without configuration parameters
+With Configuration Parameters
+
+Copy
+	{
+
+	    "pipelineTasks" : [
+
+	        {
+
+	            "taskType" : "asr"
+
+	        },
+
+	        {
+
+	            "taskType": "translation"
+
+	        },
+
+	        {  
+
+	            "taskType": "tts"
+
+	        },
+
+	        
+
+	    ],
+
+	    "pipelineRequestConfig" : {
+
+	        "pipelineId" : "xxxx8d51ae52cxxxxxxxx"
+
+	    }
+
+	}
+Parameters
+
+We will now understand about each parameter available as a part of this payload.
+
+taskType
+
+Type: String
+
+Line 3-5 for ASR
+
+Line 6-8 for Translation
+
+Line 9-11 for TTS
+
+pipelineTasks
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of taskType as defined above, that are to be done by the integrator. The sequence of tasks matter. In the above example, the configuration that will be returned back in the response will be for tasks ASR, Translation and TTS in that order.
+
+Each pipelineId (discussed below), may support few individual or task sequences as explained here and here and detailed out below. 
+
+pipelineId
+
+Type: String
+
+pipelineId takes a string value of the specific pipeline integrator wants to use. The pipeline ID can be obtained either via Pipeline Search Call or via ULCA Web based on the description which helps the integrator to understand what a pipeline can or cannot do.
+Each pipeline ID may support multiple task and task sequences.
+
+The same has been explained here and here.
+
+pipelineRequestConfig
+
+Type: Dictionary
+
+This parameter takes in the configuration requested to do the sequence of tasks defined under parameter pipelineTasks.
+
+Integrators want to do individual tasks
+Payload for Only ASR
+Payload for Only Translation
+
+pipelineTasks array takes only one dictionary with taskType as asr 
+
+Copy
+	"pipelineTasks" : [
+
+	    {
+
+	        "taskType" : "asr"
+
+	    }
+
+	]
+
+Integrators want to do combination of tasks in that order
+ASR then Translation
+Translation then TTS
+
+pipelineTasks array takes two dictionaries with taskType as asr and translation in that sequence.
+
+Requesting Server with this in the pipelineTasks parameter would mean that integrator wants to ask the server to give the configuration details where server will be able to perform ASR and Translation together by first doing ASR on the input audio, generating digital text of that audio and then also able to generate translation on the output of that ASR.
+
+Copy
+	"pipelineTasks" : [
+
+	    {
+
+	        "taskType" : "asr"
+
+	    },
+
+	    {
+
+	        "taskType" : "translation"
+
+	    }
+
+	]
+
+Previous
+Pipeline Config Call
+Next
+Response Payload
+
+Last updated 2 years ago

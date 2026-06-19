@@ -1,0 +1,21 @@
+TITLE: Response Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/text-language-detection-compute-call/response-payload#text-language-detection-response
+
+Copy
+TEXT LANGUAGE DETECTION COMPUTE CALL
+Response Payload
+
+This sub-page lets the integrator to actually be able to obtain the inference response with the output of individual tasks or tasks sequence in the order requested by the integrator.
+
+Complete payload
+
+Text language Detection response
+
+The above JSON Response shows the output of the Text language detection task requested by the integrator in that order. 
+
+Previous
+Request payload
+Next
+Speaker Diarization Compute Call
+
+Last updated 1 year ago

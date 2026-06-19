@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhashini API Technical Support Assistant</title>
+    <meta name="description" content="An AI-powered RAG assistant providing precise technical support for Bhashini API integration.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar for configuration and info -->
+        <aside class="sidebar" id="sidebar-container">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <div class="logo-icon"><i class="fa-solid fa-brain-circuit"></i></div>
+                    <div class="logo-text">
+                        <h2>Bhashini AI</h2>
+                        <span>Doc Assistant</span>
+                    </div>
+                </div>
+                <button class="close-sidebar-btn" id="close-sidebar" aria-label="Close sidebar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-content">
+                <div class="config-section">
+                    <h3><i class="fa-solid fa-sliders"></i> Engine Settings</h3>
+                    
+                    <div class="form-group">
+                        <label for="provider-select">LLM Provider</label>
+                        <select id="provider-select">
+                            <option value="auto">Auto (Detect Key)</option>
+                            <option value="groq">Groq (Cloud)</option>
+                            <option value="openai">OpenAI (Cloud)</option>
+                            <option value="ollama">Ollama (Local)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="model-input">Model Name</label>
+                        <input type="text" id="model-input" placeholder="e.g. gpt-4o-mini, llama3">
+                        <small class="help-text">Leave blank for default</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="temp-slider">Temperature: <span id="temp-val">0.1</span></label>
+                        <input type="range" id="temp-slider" min="0" max="1" step="0.05" value="0.1">
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3><i class="fa-solid fa-database"></i> RAG Settings</h3>
+                    
+                    <div class="form-group">
+                        <label for="k-slider">Context Chunks (k): <span id="k-val">4</span></label>
+                        <input type="range" id="k-slider" min="1" max="10" step="1" value="4">
+                        <small class="help-text">Number of source snippets retrieved</small>
+                    </div>
+                </div>
+
+                <div class="config-section status-box">
+                    <h3><i class="fa-solid fa-circle-check"></i> System Status</h3>
+                    <div class="status-item">
+                        <span class="status-label">Database Path:</span>
+                        <span class="status-value monospace">./chroma_db</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Groq Key:</span>
+                        <span class="status-value" id="groq-key-status"><i class="fa-solid fa-spinner fa-spin"></i> Checking</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">OpenAI Key:</span>
+                        <span class="status-value" id="openai-key-status"><i class="fa-solid fa-spinner fa-spin"></i> Checking</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Local Embeddings:</span>
+                        <span class="status-value text-green">Active (384d)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-secondary btn-full" id="clear-chat-btn">
+                    <i class="fa-solid fa-trash-can"></i> Clear History
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main chat area -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="header-left">
+                    <button class="menu-toggle-btn" id="menu-toggle" aria-label="Open settings">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h1>Bhashini API Chatbot</h1>
+                    <div class="connection-pill" id="conn-indicator">
+                        <span class="pulse-dot"></span>
+                        <span class="pill-text">Ready</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <a href="https://dibd-bhashini.gitbook.io/bhashini-apis" target="_blank" rel="noopener" class="docs-link">
+                        <i class="fa-solid fa-book-open"></i> Documentation
+                    </a>
+                </div>
+            </header>
+
+            <div class="messages-container" id="messages-wrapper">
+                <!-- Welcome Screen (Visible on empty chat) -->
+                <div class="welcome-screen" id="welcome-container">
+                    <div class="welcome-icon">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h2>Welcome to the Bhashini API Assistant</h2>
+                    <p>I have ingested the official Bhashini API documentation (Speech Recognition ASR, Neural Machine Translation NMT, and Text-to-Speech TTS). Ask me how to authenticate, configure headers, structure payloads, or handle pipelines.</p>
+                    
+                    <div class="suggestion-grid">
+                        <div class="suggestion-card" data-query="What is a ULCA pipeline and a Pipeline ID?">
+                            <h4>What is a ULCA pipeline?</h4>
+                            <p>Understand task sequences and the differences between pipelines like P1 and P2.</p>
+                        </div>
+                        <div class="suggestion-card" data-query="Show me the exact API payload for the Pipeline Compute Call.">
+                            <h4>Pipeline Compute Payload</h4>
+                            <p>Get the request structure, endpoints, and language configuration options.</p>
+                        </div>
+                        <div class="suggestion-card" data-query="What is the Pipeline Config Call and why is it mandatory?">
+                            <h4>Pipeline Config Call</h4>
+                            <p>Learn how to retrieve service endpoints and model configurations before executing calls.</p>
+                        </div>
+                        <div class="suggestion-card" data-query="List the Bhashini language codes and explain which code standard is followed.">
+                            <h4>Language Codes</h4>
+                            <p>See code mapping (e.g. 'hi' for Hindi, 'en' for English) and ISO-639 specifications.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Feed (populated by js) -->
+                <div class="messages-list" id="chat-messages"></div>
+
+                <!-- Loading Bubble -->
+                <div class="loading-bubble" id="loading-indicator">
+                    <div class="loading-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="loading-content">
+                        <span class="status-text">Searching documentation database...</span>
+                        <div class="loading-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat input panel -->
+            <footer class="input-panel">
+                <form id="chat-form" class="chat-form">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="user-input" 
+                            placeholder="Ask about Bhashini APIs (e.g., 'How to do text to speech?')..." 
+                            rows="1" 
+                            required
+                        ></textarea>
+                        <button type="submit" class="send-btn" id="send-button" aria-label="Send message">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-meta">
+                        <span>Press Enter to send, Shift+Enter for new line. Powered by Chroma RAG.</span>
+                    </div>
+                </form>
+            </footer>
+        </main>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
+

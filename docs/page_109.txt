@@ -1,0 +1,20 @@
+TITLE: Response Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/transliteration-compute-call/response-payload#transliteration
+
+Copy
+TRANSLITERATION COMPUTE CALL
+Response Payload
+
+This sub-page lets the integrator to actually be able to obtain the inference response with the output of individual tasks or tasks sequence in the order requested by the integrator.
+
+Complete Payload
+Transliteration
+
+The above JSON Response shows the output of the Transliteration task requested by the integrator in that order. Below we will discuss the individual task response as well as combination of tasks in specific sequence.
+
+Previous
+Request Payload
+Next
+Optical Character Recognition Call
+
+Last updated 1 year ago

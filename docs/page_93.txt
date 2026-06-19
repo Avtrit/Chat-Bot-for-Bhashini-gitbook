@@ -1,0 +1,81 @@
+TITLE: Request Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/speaker-diarization-compute-call/request-payload#parameter-inputdata
+
+Copy
+SPEAKER DIARIZATION COMPUTE CALL
+Request Payload
+
+This sub-page helps the integrator to understand various different types of request payload based on the individual task or combination of tasks in that sequence that integrator wants to do.
+
+Speaker Diarization
+Copy
+  {
+
+    "pipelineTasks": [
+
+        {
+
+            "taskType": "speaker-diarization",
+
+            "config": {
+
+                "serviceId": "{{speaker-diarization_service_id}}"
+
+            }
+
+        }
+
+    ],
+
+    "inputData": {
+
+        "audio": [
+
+            {
+
+                "audioUri": "INSERT_AUDIO_URL_HERE"
+
+              // "audioContent": "INSERT_BASE64_AUDIO_HERE"    
+
+            }
+
+        ]
+
+    }
+
+}
+
+This request contains 2 major parameters listed below and detailed further down the section:
+
+pipelineTasks
+
+inputData
+
+Parameter: pipelineTasks
+
+Type: Array
+
+This parameter takes an array of tasks, in the form of dictionary of taskType and config, that are to be done by the integrator. In the above example, pipelineTasks takes only one dictionary (line 2-9) because integrator wants to do only Audio language detection. taskType parameter takes String that takes the value speaker-diarization.
+
+config is a single key parameter which maps to another object called serviceId
+
+The serviceId parameter is essential for invoking the backend model endpoint for the specified taskType with its authentication key. For supported serviceId and languages of the Speaker Diarization service, please visit this link.
+
+Available Models for usage | Bhashini APIs
+dibd-bhashini.gitbook.io
+Explore Available serviceIds and supported languages
+
+preProcessors is an optional parameter which helps in reducing the background noise and to improve the clarity of the speech signal. These preprocessing steps help in improving the overall performance of speaker diarization API by providing cleaner and more structured input for the core diarization model.
+
+Parameter: inputData
+
+inputData Parameter takes the actual input from the integrator on which the individual task has to be done.  in this case, the input is taken via audioUri or audioContent (base64 format).
+
+either user can pass audioUri as input or audioContent as input.
+
+Previous
+Speaker Diarization Compute Call
+Next
+Response Payload
+
+Last updated 1 year ago

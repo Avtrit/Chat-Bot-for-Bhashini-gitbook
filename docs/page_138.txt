@@ -1,0 +1,156 @@
+TITLE: Response Payload | Bhashini APIs
+URL: https://dibd-bhashini.gitbook.io/bhashini-apis/pipeline-compute-call/response-payload#complete-payload
+
+Copy
+PIPELINE COMPUTE CALL
+Response Payload
+
+This sub-page lets the integrator to actually be able to obtain the inference response with the output of individual tasks or tasks sequence in the order requested by the integrator.
+
+Complete Payload
+ASR+Translate+TTS
+
+The above JSON Response shows the output of the combination of ASR, Translation and TTS task requested by the integrator in that order. Below we will discuss the individual task response as well as combination of tasks in specific sequence.
+
+Response for Payload sent for Individual Task Request
+ASR
+Translation
+TTS
+Copy
+	{
+
+	    "taskType": "asr",
+
+	    "config": {
+
+	        "serviceId": "xxxxx--ssssss-d-ddd--dddd",
+
+	        "language": {
+
+	            "sourceLanguage": "hi",
+
+	            "sourceScriptCode": ""
+
+	        },
+
+	        "audioFormat": "flac",
+
+	        "encoding": null,
+
+	        "samplingRate": 16000,
+
+	        "postProcessors": null
+
+	    },
+
+	    "output": [
+
+	        {
+
+	            "source": "मेरा नाम महीर है और मैं भाषा यूज़ कर रहा हूँ"
+
+	        }
+
+	    ],
+
+	    "audio": null
+
+	}
+
+For individual ASR task request sent by the integrator, the response will contain only one dictionary where taskType will be asr. 
+
+Parameter: config
+
+config parameter returns the configuration details of the output generated.
+
+Parameter: output
+
+output parameter
+
+contains
+
+source parameter which gives the actual digital text of the audio sent as a part of the request as detailed here.
+
+Response for Payload sent for Individual Task Request
+ASR+Translation
+Translation+TTS
+ASR+Translation+TTS
+
+Output of ASR+Translation comes in the form of combination of ASR and Translation dictionary as detailed above.
+
+Copy
+	{
+
+	    "pipelineResponse": [
+
+	        {
+
+	            "taskType": "asr",
+
+	            "config": {
+
+	                "serviceId": "xxxxx--ssssss-d-ddd--dddd",
+
+	                "language": {
+
+	                    "sourceLanguage": "hi",
+
+	                    "sourceScriptCode": ""
+
+	                },
+
+	                "audioFormat": "flac",
+
+	                "encoding": null,
+
+	                "samplingRate": 16000,
+
+	                "postProcessors": null
+
+	            },
+
+	            "output": [
+
+	                {
+
+	                    "source": "मेरा नाम महीर है और मैं भाषावर्ष यूज़ कर रहा हूँ"
+
+	                }
+
+	            ],
+
+	            "audio": null
+
+	        },
+
+	        {
+
+	            "taskType": "translation",
+
+	            "config": null,
+
+	            "output": [
+
+	                {
+
+	                    "source": "मेरा नाम महीर है और मैं भाषावर्ष यूज़ कर रहा हूँ",
+
+	                    "target": "माझे नाव माहिर आहे आणि मी भाषेचे वर्ष वापरत आहे"
+
+	                }
+
+	            ],
+
+	            "audio": null
+
+	        }
+
+	    ]
+
+	}
+Previous
+Request Payload
+Next
+Transliteration Config Call
+
+Last updated 1 year ago
